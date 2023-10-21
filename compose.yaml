@@ -1,0 +1,14 @@
+services:
+  hokebo-db:
+    image: postgres
+    container_name: hokebo-db
+    environment:
+      - POSTGRES_USER=hokebo-db-admin
+      - POSTGRES_PASSWORD=godmodeOhneGod!
+    ports:
+      - 3000:5432
+    volumes:
+      - hokebo-db-postgres:/var/lib/postgresql/data
+
+volumes:
+  hokebo-db-postgres:
