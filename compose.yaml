@@ -5,6 +5,7 @@ services:
     environment:
       - POSTGRES_USER=hokebo-db-admin
       - POSTGRES_PASSWORD=godmodeOhneGod!
+      - POSTGRES_DB=hokebo
     ports:
       - 3000:5432
     volumes:
