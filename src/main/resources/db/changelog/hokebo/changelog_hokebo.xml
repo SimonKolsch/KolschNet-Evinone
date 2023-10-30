@@ -3,6 +3,7 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="V000001_create_accounting.sql" relativeToChangelogFile="true"/>
+    <include file="V000001_create_account.sql" relativeToChangelogFile="true"/>
+    <include file="V000002_create_booking.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
