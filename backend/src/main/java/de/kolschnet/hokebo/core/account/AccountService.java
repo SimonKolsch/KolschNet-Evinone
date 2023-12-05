@@ -2,6 +2,7 @@ package de.kolschnet.hokebo.core.account;
 
 import de.kolschnet.hokebo.common.exceptions.EntityNotExists;
 import de.kolschnet.hokebo.common.exceptions.HttpException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class AccountService {
   protected HttpException.Info getInfoForException(Long id) {
     return HttpException.info("ClassName", this.getClass().getSimpleName())
         .and("Id", id);
+  }
+
+  public List<AccountDto> getAll() {
+    return AccountDto.of(accountRepository.findAll());
   }
 }
