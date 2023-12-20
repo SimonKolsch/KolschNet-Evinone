@@ -7,7 +7,5 @@ export async function accountLoader() {
 
   let test: Account[] = await AccountApi.getAll();
 
-  console.info(test);
-
   return json(test, {status: 200});
 }

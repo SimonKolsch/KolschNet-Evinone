@@ -6,9 +6,9 @@ CREATE TABLE IF NOT EXISTS public.transactions
     amount                  numeric not null,
     currency                varchar(3) not null,
     created_date            timestamp  not null,
-    created_by              BIGSERIAL not null,
+    created_by              bigint  not null,
     last_modified_date      timestamp,
-    last_modified_by        BIGSERIAL,
+    last_modified_by        bigint ,
 
     CONSTRAINT transactions_pk PRIMARY KEY (id)
 

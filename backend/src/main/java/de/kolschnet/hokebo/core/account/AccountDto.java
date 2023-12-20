@@ -17,6 +17,7 @@ public record AccountDto (
             account.getIban()
         );
     }
+
     static List<AccountDto> of(List<AccountEntity> accountList) {
         return accountList.stream().map(AccountDto::of).toList();
     }

@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreRemove;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import lombok.AccessLevel;
@@ -50,4 +53,25 @@ class AccountEntity {
     @Column(nullable = false, length = 22)
     @Setter
     private String iban;
+
+    @PrePersist
+    public void onPrePersist() {
+        audit("INSERT");
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        audit("UPDATE");
+    }
+
+    @PreRemove
+    public void onPreRemove() {
+        audit("DELETE");
+    }
+
+    private void audit(String operation) {
+        System.out.println(operation);
+        createdDate = Instant.now();
+        createdBy = 10L;
+    }
 }

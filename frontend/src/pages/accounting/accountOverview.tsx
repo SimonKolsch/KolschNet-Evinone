@@ -4,23 +4,25 @@ import {Account} from "../../common/types";
 import { DataTable } from 'mantine-datatable';
 import { useForm } from "@mantine/form";
 import {Button, Group, TextInput } from "@mantine/core";
+import {AccountApi} from "../../common/api";
 
 export const AccountOverview: React.FC = () => {
   const data: Account[] = useLoaderData() as Account[];
+
+  const submit = (values :{iban: string, owner: string}) => {
+    AccountApi.postAccount(values);
+  }
+
   const form = useForm({
     initialValues: {
       iban: '',
-      owner: 1,
+      owner: "ownerTest",
     },
 
     validate: {
       iban: (value) => (value.length == 22 ? null : 'Iban should have a length of 22 '),
     },
   });
-
-  const submit = (values :{iban: string, owner: number}) => {
-    console.log(values)
-  }
 
   return (
       <>

@@ -20,4 +20,8 @@ public class AccountFacade {
   public List<AccountDto> getAll() {
     return accountService.getAll();
   }
+
+  public void createAccount(String owner, String iban) {
+    accountService.create(NewAccountDto.of(owner, iban));
+  }
 }
