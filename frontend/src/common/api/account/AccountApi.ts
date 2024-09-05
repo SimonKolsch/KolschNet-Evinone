@@ -3,11 +3,17 @@ import {Account} from "../../types";
 
 export class AccountApi {
 
+  static urlVersion = "v1/account";
+
   static async getAll(): Promise<Account[]> {
-    return await Api.getInstance().get("account/get-all")
+    return await Api.getInstance().get(this.urlVersion + "/get-all")
+  }
+
+  static async getByID(accountId: string): Promise<Account> {
+    return await Api.getInstance().get(this.urlVersion + "/by-id/" + accountId);
   }
 
   static async postAccount(newAccount: {iban: string, owner: string}) {
-    await Api.getInstance().post("account/", newAccount);
+    await Api.getInstance().post(this.urlVersion, newAccount);
   }
 }

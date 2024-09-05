@@ -1,6 +1,5 @@
 import {createBrowserRouter, redirect} from "react-router-dom";
-import {AccountOverview} from "../../pages/accounting/accountOverview.tsx";
-import {accountLoader} from "../../pages/accounting/module.ts";
+import {AccountOverview, Account, accountLoader, accountOverviewLoader} from "../../pages";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +8,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/accounts",
-    loader: accountLoader,
+    loader: accountOverviewLoader,
     element: <AccountOverview />,
+  },
+  {
+    path: "/account/:accountId",
+    loader: ({params}) => accountLoader(params.accountId),
+    element: <Account />,
   },
 ]);

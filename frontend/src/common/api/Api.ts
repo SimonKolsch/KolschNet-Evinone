@@ -35,7 +35,7 @@ export class Api {
   private http: Http;
 
   constructor() {
-    this.apiUrl = `http://localhost:9900/bank`;
+    this.apiUrl = `http://localhost:9900/hokebo`;
     this.http = new Http();
   }
 
