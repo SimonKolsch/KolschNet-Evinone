@@ -14,6 +14,6 @@ export class AccountApi {
   }
 
   static async postAccount(newAccount: {iban: string, owner: string}) {
-    await Api.getInstance().post(this.urlVersion, newAccount);
+    await Api.getInstance().post(this.urlVersion + "/", newAccount);
   }
 }

@@ -1,14 +1,13 @@
-package de.kolschnet.evinone.hokebo.modules.finance.account.core;
+package de.kolschnet.evinone.wotibo.modules.timetable.core;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreRemove;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,17 +18,37 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "account", schema = "hokebo")
-public class Account {
+@Table(name = "timetable", schema = "wotibo")
+public class Timetable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
   private Long id;
+
+  @NotNull
+  @Column(name = "owner", nullable = false, length = Integer.MAX_VALUE)
+  private String owner;
+
+  @NotNull
+  @Column(name = "work_start", nullable = false)
+  private Instant workStart;
+
+  @NotNull
+  @Column(name = "work_end", nullable = false)
+  private Instant workEnd;
+
+  @NotNull
+  @Column(name = "work_time", nullable = false)
+  private Integer workTime;
+
+  @NotNull
+  @Column(name = "pause_time", nullable = false)
+  private Integer pauseTime;
 
   @CreatedBy
   @Column(nullable = false)
@@ -45,32 +64,4 @@ public class Account {
   @LastModifiedDate
   private Instant lastModifiedOn;
 
-  @Column(nullable = false)
-  @Setter
-  private String owner;
-
-  @Column(nullable = false, length = 22)
-  @Setter
-  private String iban;
-
-  @PrePersist
-  public void onPrePersist() {
-    audit("INSERT");
-  }
-
-  @PreUpdate
-  public void onPreUpdate() {
-    audit("UPDATE");
-  }
-
-  @PreRemove
-  public void onPreRemove() {
-    audit("DELETE");
-  }
-
-  private void audit(String operation) {
-    System.out.println(operation);
-    createdOn = Instant.now();
-    createdBy = 10L;
-  }
 }

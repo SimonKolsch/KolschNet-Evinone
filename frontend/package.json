@@ -13,8 +13,8 @@
     "@mantine/core": "^7.3.2",
     "@mantine/form": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
-    "@mantine/notifications": "^7.3.2",
     "@mantine/modals": "^7.3.2",
+    "@mantine/notifications": "^7.3.2",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "mantine-datatable": "^7.3.0",
@@ -24,6 +24,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@mantinex/mantine-logo": "^1.0.1",
+    "@tabler/icons-react": "^3.19.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",

@@ -24,7 +24,7 @@ import org.springframework.data.annotation.CreatedDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "account_value", schema = "public")
+@Table(name = "account_value", schema = "hokebo")
 public class AccountValue {
 
   @Id

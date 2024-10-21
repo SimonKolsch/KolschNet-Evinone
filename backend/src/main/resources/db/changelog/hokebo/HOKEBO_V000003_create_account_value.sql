@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.account_value
+CREATE TABLE IF NOT EXISTS hokebo.account_value
 (
     id                      BIGSERIAL NOT NULL,
     account_id              BIGINT not null,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS public.account_value
 
 );
 
-alter table account_value
+alter table hokebo.account_value
     add constraint accountValue_account_id_fk
-        foreign key (account_id) references public.account;
+        foreign key (account_id) references hokebo.account;
 

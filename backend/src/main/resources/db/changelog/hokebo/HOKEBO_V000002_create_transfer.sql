@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.transfer
+CREATE TABLE IF NOT EXISTS hokebo.transfer
 (
     id                      BIGSERIAL NOT NULL,
     credit_account_id       BIGINT not null,
@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS public.transfer
 
 );
 
-alter table transfer
+alter table hokebo.transfer
     add constraint transfer_creditAccountId_fk
-        foreign key (credit_account_id) references public.account;
-alter table transfer
+        foreign key (credit_account_id) references hokebo.account;
+alter table hokebo.transfer
     add constraint transfer_debitAccountId_fk
-        foreign key (debit_account_id) references public.account;
+        foreign key (debit_account_id) references hokebo.account;
 

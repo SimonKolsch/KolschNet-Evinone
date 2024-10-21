@@ -25,7 +25,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Entity
-@Table(name = "transfer", schema = "public")
+@Table(name = "transfer", schema = "hokebo")
 public class Transfer {
 
   @Id

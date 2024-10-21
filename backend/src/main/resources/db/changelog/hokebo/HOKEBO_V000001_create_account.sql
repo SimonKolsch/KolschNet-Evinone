@@ -1,4 +1,6 @@
-CREATE TABLE IF NOT EXISTS public.account
+CREATE SCHEMA IF NOT EXISTS hokebo;
+
+CREATE TABLE IF NOT EXISTS hokebo.account
 (
     id                      BIGSERIAL NOT NULL,
     owner                   varchar not null,
