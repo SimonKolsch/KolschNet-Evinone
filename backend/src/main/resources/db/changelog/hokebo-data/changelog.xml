@@ -3,7 +3,8 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="changelog.xml" relativeToChangelogFile="true"/>
-    <include file="hokebo-data/changelog.xml" relativeToChangelogFile="true"/>
+    <include file="HOKEBO_D_V000001_account.sql" relativeToChangelogFile="true"/>
+    <include file="HOKEBO_D_V000002_transfer.sql" relativeToChangelogFile="true"/>
+    <include file="HOKEBO_D_V000003_account_value.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
