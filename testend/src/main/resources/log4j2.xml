@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+  <Appenders>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%yellow{%d{HH:mm:ss,SSS} %p{length=1}}  %white{%-35.35c{1.2.3.3}} %highlight{%m%n%ex}"/>
+      <!-- PatternLayout
+          pattern="%highlight{%d{HH:mm:ss,SSS} [%-5level] [%t] %logger(%F:%L): %msg%n%throwable}"/ -->
+    </Console>
+  </Appenders>
+  <Loggers>
+
+    <!-- Prevent debug logging of Spring  -->
+    <Logger level="info" name="org.springframework"/>
+
+    <!-- But log controller calls  -->
+    <!-- Logger
+        name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod"
+        level="trace"/ -->
+
+    <!-- Prevent debug logging of Hibernate  -->
+    <Logger level="info" name="org.hibernate"/>
+
+    <!-- Log SQL column/parameter values -->
+    <Logger level="info" name="org.hibernate.type"/>
+
+    <Root level="debug">
+      <AppenderRef level="all" ref="ConsoleAppender"/>
+    </Root>
+  </Loggers>
+</Configuration>
