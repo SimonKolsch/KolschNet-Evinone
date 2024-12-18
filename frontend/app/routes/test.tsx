@@ -1,4 +1,6 @@
 import type { Route } from "./+types/test";
+import {Account, LoaderData} from "~/common/types";
+import {AccountApi} from "~/common/api";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -7,10 +9,16 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Test() {
+export default function Test({loaderData}: {loaderData: LoaderData}) {
   return (
       <>
-        Test Me
+        Test Me - {loaderData.message}
       </>
   );
+}
+
+export async function loader(): Promise<LoaderData> {
+  let test: Account = await AccountApi.getByID(1);
+  console.log(test);
+  return { message: "Hello, world! " + test.iban };
 }

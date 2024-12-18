@@ -1,3 +1,7 @@
+import type { Route } from "./+types/root";
+import {createTheme, MantineColorsTuple, MantineProvider, DEFAULT_THEME} from "@mantine/core";
+import '@mantine/core/styles.css';
+import stylesheet from "./app.css?url";
 import {
   isRouteErrorResponse,
   Links,
@@ -6,9 +10,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
-import type { Route } from "./+types/root";
-import stylesheet from "./app.css?url";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -43,7 +44,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+      <MantineProvider theme={DEFAULT_THEME}>
+        <Outlet />
+      </MantineProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

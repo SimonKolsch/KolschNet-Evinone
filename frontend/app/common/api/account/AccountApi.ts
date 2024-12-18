@@ -9,7 +9,7 @@ export class AccountApi {
     return await Api.getInstance().get(this.urlVersion + "/get-all")
   }
 
-  static async getByID(accountId: string): Promise<Account> {
+  static async getByID(accountId: number): Promise<Account> {
     return await Api.getInstance().get(this.urlVersion + "/by-id/" + accountId);
   }
 

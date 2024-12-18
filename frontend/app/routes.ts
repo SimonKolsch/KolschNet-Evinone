@@ -1,8 +1,12 @@
-import {type RouteConfig, index, route} from "@react-router/dev/routes";
+import {type RouteConfig, index, route, layout} from "@react-router/dev/routes";
 
 export default [
-    index("routes/home.tsx"),
-    route("test", "routes/test.tsx"),
-    route("account", "routes/account.tsx"),
-    route("accountOverview", "routes/accountOverview.tsx")
+    layout("pages/layout.tsx", [
+        index("routes/home.tsx"),
+        route("test", "routes/test.tsx"),
+        layout("pages/hokebo/layout/layout.tsx", [
+            route("account", "routes/account.tsx"),
+            route("accountOverview", "routes/accountOverview.tsx")
+        ]),
+    ]),
 ] satisfies RouteConfig;

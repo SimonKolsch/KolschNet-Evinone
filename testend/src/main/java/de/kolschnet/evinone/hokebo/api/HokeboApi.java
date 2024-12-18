@@ -25,7 +25,7 @@ public class HokeboApi {
 
   @GetMapping("/by-id/{id}")
   public AccountDto getAccountById(@PathVariable(value = "id") Long id) {
-    return new AccountDto(null, null, null, null);
+    return new AccountDto(1L, "Simon", "123456789012", null);
   }
 
   @GetMapping("/by-iban/{iban}")
