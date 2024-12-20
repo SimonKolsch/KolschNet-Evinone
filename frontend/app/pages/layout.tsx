@@ -1,115 +1,170 @@
-import React from "react";
 import { useState } from 'react';
-import {UnstyledButton, Tooltip, Title, rem, Button} from '@mantine/core';
 import {
-  IconHome2,
-  IconGauge,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconCalendarStats,
-  IconUser,
-  IconSettings,
+    IconChevronDown,
+    IconHeart,
+    IconLogout,
+    IconMessage,
+    IconPlayerPause,
+    IconSettings,
+    IconStar,
+    IconSwitchHorizontal,
+    IconTrash,
 } from '@tabler/icons-react';
+import cx from 'clsx';
+import {
+    Avatar,
+    Burger, Button,
+    Container,
+    Group,
+    Menu,
+    Tabs,
+    Text,
+    UnstyledButton,
+    useMantineTheme,
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './layout.module.css';
 import {NavLink, Outlet} from "react-router";
 
-const mainLinksMockdata = [
-  { icon: IconHome2, label: 'Home' },
-  { icon: IconGauge, label: 'Dashboard' },
-  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' },
-  { icon: IconCalendarStats, label: 'Releases' },
-  { icon: IconUser, label: 'Account' },
-  { icon: IconFingerprint, label: 'Security' },
-  { icon: IconSettings, label: 'Settings' },
-];
+const user = {
+    name: 'Jane Spoonfighter',
+    email: 'janspoon@fighter.dev',
+    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
+};
 
-const linksMockdata = [
-  'Security',
-  'Settings',
-  'Dashboard',
-  'Releases',
-  'Account',
-  'Orders',
-  'Clients',
-  'Databases',
-  'Pull Requests',
-  'Open Issues',
-  'Wiki pages',
+const tabs = [
+    'Home',
+    'Orders',
+    'Education',
+    'Community',
+    'Forums',
+    'Support',
+    'Account',
+    'Helpdesk',
 ];
 
 export default function Layout() {
+    const theme = useMantineTheme();
+    const [opened, { toggle }] = useDisclosure(false);
+    const [userMenuOpened, setUserMenuOpened] = useState(false);
 
-  const [active, setActive] = useState('Releases');
-  const [activeLink, setActiveLink] = useState('Settings');
+    const items = tabs.map((tab) => (
+        <Tabs.Tab value={tab} key={tab}>
+            {tab}
+        </Tabs.Tab>
+    ));
 
-  const mainLinks = mainLinksMockdata.map((link) => (
-      <Tooltip
-          label={link.label}
-          position="right"
-          withArrow
-          transitionProps={{ duration: 0 }}
-          key={link.label}
-      >
-        <UnstyledButton
-            onClick={() => setActive(link.label)}
-            className={classes.mainLink}
-            data-active={link.label === active || undefined}
-        >
-          <link.icon style={{ width: rem(22), height: rem(22) }} stroke={1.5} />
-        </UnstyledButton>
-      </Tooltip>
-  ));
+    return (
+        <>
+            <div className={classes.header}>
+                <Container className={classes.mainSection} size="md">
+                    <Group justify="space-between">
+                        <MantineLogo size={28}/>
 
-  const links = linksMockdata.map((link) => (
-      <a
-          className={classes.link}
-          data-active={activeLink === link || undefined}
-          href="#"
-          onClick={(event) => {
-            event.preventDefault();
-            setActiveLink(link);
-          }}
-          key={link}
-      >
-        {link}
-      </a>
-  ));
+                        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm"/>
 
+                        <Menu
+                            width={260}
+                            position="bottom-end"
+                            transitionProps={{transition: 'pop-top-right'}}
+                            onClose={() => setUserMenuOpened(false)}
+                            onOpen={() => setUserMenuOpened(true)}
+                            withinPortal
+                        >
+                            <Menu.Target>
+                                <UnstyledButton
+                                    className={cx(classes.user, {[classes.userActive]: userMenuOpened})}
+                                >
+                                    <Group gap={7}>
+                                        <Avatar src={user.image} alt={user.name} radius="xl" size={20}/>
+                                        <Text fw={500} size="sm" lh={1} mr={3}>
+                                            {user.name}
+                                        </Text>
+                                        <IconChevronDown size={12} stroke={1.5}/>
+                                    </Group>
+                                </UnstyledButton>
+                            </Menu.Target>
+                            <Menu.Dropdown>
+                                <Menu.Item
+                                    leftSection={<IconHeart size={16} color={theme.colors.red[6]} stroke={1.5}/>}
+                                >
+                                    Liked posts
+                                </Menu.Item>
+                                <Menu.Item
+                                    leftSection={<IconStar size={16} color={theme.colors.yellow[6]} stroke={1.5}/>}
+                                >
+                                    Saved posts
+                                </Menu.Item>
+                                <Menu.Item
+                                    leftSection={<IconMessage size={16} color={theme.colors.blue[6]} stroke={1.5}/>}
+                                >
+                                    Your comments
+                                </Menu.Item>
 
-  return (
-      <div className={classes.div}>
-        <nav className={classes.navbar}>
-          <div className={classes.wrapper}>
-            <div className={classes.aside}>
-              <div className={classes.logo}>
-                <MantineLogo type="mark" size={30}/>
-              </div>
-              {mainLinks}
+                                <Menu.Label>Settings</Menu.Label>
+                                <Menu.Item leftSection={<IconSettings size={16} stroke={1.5}/>}>
+                                    Account settings
+                                </Menu.Item>
+                                <Menu.Item leftSection={<IconSwitchHorizontal size={16} stroke={1.5}/>}>
+                                    Change account
+                                </Menu.Item>
+                                <Menu.Item leftSection={<IconLogout size={16} stroke={1.5}/>}>Logout</Menu.Item>
+
+                                <Menu.Divider/>
+
+                                <Menu.Label>Danger zone</Menu.Label>
+                                <Menu.Item leftSection={<IconPlayerPause size={16} stroke={1.5}/>}>
+                                    Pause subscription
+                                </Menu.Item>
+                                <Menu.Item color="red" leftSection={<IconTrash size={16} stroke={1.5}/>}>
+                                    Delete account
+                                </Menu.Item>
+                            </Menu.Dropdown>
+                        </Menu>
+                    </Group>
+                </Container>
+                <Container size="md">
+                    <Tabs
+                        defaultValue="Home"
+                        variant="outline"
+                        visibleFrom="sm"
+                        classNames={{
+                            root: classes.tabs,
+                            list: classes.tabsList,
+                            tab: classes.tab,
+                        }}
+                    >
+                        <Tabs.List>{items}</Tabs.List>
+                    </Tabs>
+                </Container>
             </div>
-            <div className={classes.main}>
-              <Title order={4} className={classes.title}>
-                {active}
-              </Title>
-              {links}
+            <NavLink to="/" end>
+                <Button variant="filled">
+                    Home
+                </Button>
+            </NavLink>
+            <NavLink to="/test" end>
+                <Button variant="filled">
+                    Test
+                </Button>
+            </NavLink>
+            <NavLink to="/accountOverview" end>
+                <Button variant="filled">
+                    Account Overview
+                </Button>
+            </NavLink>
+            <NavLink to="/account" end>
+                <Button variant="filled">
+                    Account
+                </Button>
+            </NavLink>
+            <br/>
+            <br/>
+            <br/>
+            <div>
+                <Outlet/>
             </div>
-          </div>
-        </nav>
-        <div className={classes.div1}>
-          <Button variant="filled">
-            <NavLink to="/" end> Home </NavLink>
-          </Button>
-          <Button variant="filled">
-            <NavLink to="/accountOverview" end> Account Overview</NavLink>
-          </Button>
-          <Button variant="filled">
-            <NavLink to="/account" end> Account </NavLink>
-          </Button>
-          <Button variant="filled">
-            <NavLink to="/test" end> Test </NavLink>
-          </Button>
-          <Outlet />
-        </div>
-      </div>
-  );
+        </>
+    );
 }
